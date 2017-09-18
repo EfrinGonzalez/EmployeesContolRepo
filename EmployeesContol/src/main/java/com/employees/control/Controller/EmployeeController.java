@@ -26,7 +26,7 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "employees/{id}", method = RequestMethod.GET)
-	public Employee get(@PathVariable int id) {
+	public Employee get(@PathVariable Long id) {
 		//return EmployeeStub.findOne(id);
 		return employeeRepository.findOne(id);
 	}
@@ -43,17 +43,17 @@ public class EmployeeController {
 
 
 	@RequestMapping(value = "employees/{id}", method = RequestMethod.PUT)
-	public Employee update(@PathVariable int id, @RequestBody Employee employee) {
+	public Employee update(@PathVariable Long id, @RequestBody Employee employee) {
 		Employee existingEmployee = employeeRepository.findOne(id);
 		BeanUtils.copyProperties(employee, existingEmployee);
 		return employeeRepository.saveAndFlush(existingEmployee);
 	}
-	/*
-	@RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.DELETE)
-	public Shipwreck delete(@PathVariable Long id) {
-		Shipwreck existingShipwreck = shipwreckRepository.findOne(id);
-		shipwreckRepository.delete(existingShipwreck);
-		return existingShipwreck;
+	
+	@RequestMapping(value = "employees/{id}", method = RequestMethod.DELETE)
+	public Employee delete(@PathVariable Long id) {
+		Employee existingEmployee = employeeRepository.findOne(id);
+		employeeRepository.delete(existingEmployee);
+		return existingEmployee;
 	}
-*/
+
 }
